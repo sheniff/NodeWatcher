@@ -1,10 +1,28 @@
 'use strict';
 
+/////////////////////
+// Customize here ('.' is where Gruntfile is located)
+/////////////////////
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
+
+var folders2watch = [
+        // '<%= config.app %>/{,*/}*.html',
+        // '.tmp/styles/{,*/}*.css',
+        // '<%= config.app %>/images/{,*/}*'
+        './index.html'
+    ],
+    // Where index.html should be so that when you get to
+    // localhost:9000, it will load a page.
+    baseRoute = ['.'];
+
+
+/////////////////////
+// You shouldn't have to touch from here down
+/////////////////////
 
 module.exports = function (grunt) {
 
@@ -26,25 +44,11 @@ module.exports = function (grunt) {
 
         // Watches files for changes and runs tasks based on the changed files
         watch: {
-            js: {
-                files: ['<%= config.app %>/scripts/{,*/}*.js'],
-                tasks: [],
-                options: {
-                    livereload: true
-                }
-            },
             livereload: {
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 },
-                files: [
-                    // '<%= config.app %>/{,*/}*.html',
-                    // '.tmp/styles/{,*/}*.css',
-                    // '<%= config.app %>/images/{,*/}*'
-
-                    // place here the files you want to watch
-                    './index.html'
-                ]
+                files: folders2watch
             }
         },
 
@@ -59,9 +63,7 @@ module.exports = function (grunt) {
             livereload: {
                 options: {
                     open: true,
-                    base: [
-                        '.'
-                    ]
+                    base: indexLocation
                 }
             }
         }
